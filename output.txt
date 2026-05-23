@@ -1,0 +1,69 @@
+===== REVIEW 1: TOKENS =====
+Token(SHONKHA      | "সংখ্যা"             | line 1)
+Token(IDENTIFIER   | "প্রথম"              | line 1)
+Token(ASSIGN       | "="                  | line 1)
+Token(NUMBER       | "10"                 | line 1)
+Token(NEWLINE      | "\n"                 | line 1)
+Token(SHONKHA      | "সংখ্যা"             | line 2)
+Token(IDENTIFIER   | "দ্বিতীয়"            | line 2)
+Token(ASSIGN       | "="                  | line 2)
+Token(NUMBER       | "5"                  | line 2)
+Token(NEWLINE      | "\n"                 | line 2)
+Token(SHONKHA      | "সংখ্যা"             | line 3)
+Token(IDENTIFIER   | "যোগফল"              | line 3)
+Token(ASSIGN       | "="                  | line 3)
+Token(IDENTIFIER   | "প্রথম"              | line 3)
+Token(PLUS         | "+"                  | line 3)
+Token(IDENTIFIER   | "দ্বিতীয়"            | line 3)
+Token(NEWLINE      | "\n"                 | line 3)
+Token(SHONKHA      | "সংখ্যা"             | line 4)
+Token(IDENTIFIER   | "গুণফল"              | line 4)
+Token(ASSIGN       | "="                  | line 4)
+Token(IDENTIFIER   | "প্রথম"              | line 4)
+Token(MULTIPLY     | "*"                  | line 4)
+Token(IDENTIFIER   | "দ্বিতীয়"            | line 4)
+Token(NEWLINE      | "\n"                 | line 4)
+Token(NEWLINE      | "\n"                 | line 5)
+Token(BAKKHO       | "বাক্য"              | line 6)
+Token(IDENTIFIER   | "বার্তা"             | line 6)
+Token(ASSIGN       | "="                  | line 6)
+Token(STRING       | "হিসাব সম্পন্ন"      | line 6)
+Token(NEWLINE      | "\n"                 | line 6)
+Token(NEWLINE      | "\n"                 | line 7)
+Token(DEKHAO       | "দেখাও"              | line 8)
+Token(STRING       | "যোগফল:"             | line 8)
+Token(NEWLINE      | "\n"                 | line 8)
+Token(DEKHAO       | "দেখাও"              | line 9)
+Token(IDENTIFIER   | "যোগফল"              | line 9)
+Token(NEWLINE      | "\n"                 | line 9)
+Token(NEWLINE      | "\n"                 | line 10)
+Token(DEKHAO       | "দেখাও"              | line 11)
+Token(STRING       | "গুণফল:"             | line 11)
+Token(NEWLINE      | "\n"                 | line 11)
+Token(DEKHAO       | "দেখাও"              | line 12)
+Token(IDENTIFIER   | "গুণফল"              | line 12)
+Token(NEWLINE      | "\n"                 | line 12)
+Token(NEWLINE      | "\n"                 | line 13)
+Token(DEKHAO       | "দেখাও"              | line 14)
+Token(IDENTIFIER   | "বার্তা"             | line 14)
+Token(EOF          | ""                   | line 14)
+
+===== REVIEW 1: PARSER RESULT =====
+Total statements parsed: 10
+
+===== SYMBOL TABLE =====
+Bangla Name               | Type       | Java Name  | Line
+প্রথম                     | সংখ্যা     | v0         | 1
+দ্বিতীয়                   | সংখ্যা     | v1         | 2
+যোগফল                     | সংখ্যা     | v2         | 3
+গুণফল                     | সংখ্যা     | v3         | 4
+বার্তা                    | বাক্য      | v4         | 6
+
+===== REVIEW 1 RESULT =====
+Lexer tokenizes source code correctly.
+Parser handles valid input.
+Symbol table is working.
+Type checking is working.
+Assignments are working.
+Arithmetic expressions are working.
+Review 1 completed successfully.
