@@ -1,0 +1,27 @@
+BHASHA COMPILER - REVIEW 3 STATUS
+
+Review 3 completed:
+[OK] Review 1 features are kept working.
+[OK] Review 2 Python target code generation is kept working.
+[OK] If-else lexer support added.
+[OK] If-else parser support added.
+[OK] Condition parsing added.
+[OK] Condition semantic checking added.
+[OK] IF node is used in AST.
+[OK] TAC control flow added using LABEL, IF_FALSE_GOTO, and GOTO.
+[OK] Python if/else code generation added.
+[OK] output.py is generated as executable Python target code.
+[OK] output.py runs and produces final output.
+[OK] program_output.txt stores the output of output.py.
+[OK] error_sample.bhasha demonstrates syntax/semantic error recovery.
+[OK] Code generation is skipped when errors are found.
+[OK] run.bat is used for normal Review 3 demo.
+[OK] run_error.bat is used for error Review 3 demo.
+
+Loop status:
+Loop is optional in Review 3. It is not implemented in this version because the main requirement is complete if-else end-to-end.
+
+Main Review 3 statement:
+The compiler implementation language is Java.
+The generated target language is Python.
+The generated executable file is output.py.

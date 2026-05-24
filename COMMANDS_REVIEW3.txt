@@ -1,4 +1,4 @@
-===== REVIEW 2 NORMAL RUN =====
+===== REVIEW 3 NORMAL RUN =====
 
 .\run.bat
 
@@ -6,7 +6,7 @@ This command compiles the Java compiler, runs sample.bhasha, generates output.py
 runs output.py, and saves the final Python program output in program_output.txt.
 
 
-===== REVIEW 2 ERROR RUN =====
+===== REVIEW 3 ERROR RUN =====
 
 .\run_error.bat
 
@@ -42,6 +42,7 @@ code output.py
 code program_output.txt
 
 
-===== IMPORTANT REVIEW 2 LINE =====
+===== IMPORTANT REVIEW 3 LINE =====
 
 Our compiler is implemented in Java, but it generates executable Python target code in output.py.
+The generated output.py file runs using Python and produces the final program output.

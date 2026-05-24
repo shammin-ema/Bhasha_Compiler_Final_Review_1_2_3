@@ -22,3 +22,6 @@ Implemented / preserved:
 
 Most important explanation line:
 "Our compiler is implemented in Java, but it generates executable Python target code in output.py."
+
+
+Review 3 note: This file is kept for Review 2 history. For final Review 3 demo, see REVIEW3_STATUS.txt and COMMANDS_REVIEW3.txt.
