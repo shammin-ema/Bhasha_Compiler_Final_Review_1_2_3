@@ -2,218 +2,117 @@ import java.util.*;
 
 public class TACGenerator {
 
-    // =========================================
-    // TAC Generator State
-    // =========================================
-
     private final SymbolTable symbolTable;
-
-    private final List<TACInstruction> instructions =
-            new ArrayList<>();
-
+    private final List<TACInstruction> instructions = new ArrayList<>();
     private int tempCounter = 0;
-
-    // =========================================
-    // Constructor
-    // =========================================
+    private int labelCounter = 0;
 
     public TACGenerator(SymbolTable symbolTable) {
         this.symbolTable = symbolTable;
     }
 
-    // =========================================
-    // Main TAC Generation
-    // =========================================
-
-    public List<TACInstruction> generate(
-            ASTNode program
-    ) {
-
+    public List<TACInstruction> generate(ASTNode program) {
         instructions.clear();
+        tempCounter = 0;
+        labelCounter = 0;
 
-        resetTemporaryCounter();
-
-        for (ASTNode statementNode
-                : program.statements) {
-
-            generateStatement(statementNode);
+        for (ASTNode statement : program.statements) {
+            generateStatement(statement);
         }
 
         return instructions;
     }
 
-    // =========================================
-    // Statement Generation
-    // =========================================
-
     private void generateStatement(ASTNode node) {
-
         if (node == null) {
             return;
         }
 
         switch (node.nodeType) {
-
-            case DECL ->
-                    generateDeclaration(node);
-
-            case ASSIGN ->
-                    generateAssignment(node);
-
-            case PRINT ->
-                    generatePrint(node);
-
+            case DECL, ASSIGN -> {
+                String result = generateExpression(node.right);
+                String targetName = symbolTable.javaName(node.value);
+                instructions.add(TACInstruction.copy(targetName, result));
+            }
+            case PRINT -> {
+                String result = generateExpression(node.right);
+                instructions.add(TACInstruction.print(result));
+            }
+            case IF -> generateIf(node);
             default -> {
-                // Review 2 excludes if-else support.
-                // Unsupported statements are skipped.
+                // Unsupported optional/future statements are ignored safely.
             }
         }
     }
 
-    // =========================================
-    // Declaration TAC Generation
-    // =========================================
+    private void generateIf(ASTNode node) {
+        String condition = generateCondition(node.condition);
+        String elseLabel = newLabel("else");
+        String endLabel = newLabel("endif");
 
-    private void generateDeclaration(
-            ASTNode node
-    ) {
+        instructions.add(TACInstruction.ifFalseGoto(condition, elseLabel));
 
-        String result =
-                generateExpression(node.right);
+        for (ASTNode statement : node.thenBody) {
+            generateStatement(statement);
+        }
 
-        String targetName =
-                symbolTable.javaName(node.value);
+        instructions.add(TACInstruction.gotoLabel(endLabel));
+        instructions.add(TACInstruction.label(elseLabel));
 
-        instructions.add(
-                TACInstruction.copy(
-                        targetName,
-                        result
-                )
-        );
+        for (ASTNode statement : node.elseBody) {
+            generateStatement(statement);
+        }
+
+        instructions.add(TACInstruction.label(endLabel));
     }
 
-    // =========================================
-    // Assignment TAC Generation
-    // =========================================
+    private String generateCondition(ASTNode node) {
+        if (node == null) {
+            return "0 != 0";
+        }
 
-    private void generateAssignment(
-            ASTNode node
-    ) {
+        if (node.nodeType == ASTNode.NodeType.CONDITION) {
+            String left = generateExpression(node.left);
+            String right = generateExpression(node.right);
+            return left + " " + node.value + " " + right;
+        }
 
-        String result =
-                generateExpression(node.right);
-
-        String targetName =
-                symbolTable.javaName(node.value);
-
-        instructions.add(
-                TACInstruction.copy(
-                        targetName,
-                        result
-                )
-        );
+        return generateExpression(node) + " != 0";
     }
 
-    // =========================================
-    // Print TAC Generation
-    // =========================================
-
-    private void generatePrint(
-            ASTNode node
-    ) {
-
-        String result =
-                generateExpression(node.right);
-
-        instructions.add(
-                TACInstruction.print(result)
-        );
-    }
-
-    // =========================================
-    // Expression TAC Generation
-    // =========================================
-
-    private String generateExpression(
-            ASTNode node
-    ) {
-
+    private String generateExpression(ASTNode node) {
         if (node == null) {
             return "0";
         }
 
         return switch (node.nodeType) {
-
             case NUMBER -> node.value;
-
-            case STRING ->
-                    quoteString(node.value);
-
-            case IDENTIFIER ->
-                    symbolTable.javaName(node.value);
-
-            case BINOP ->
-                    generateBinaryOperation(node);
-
+            case STRING -> quoteString(node.value);
+            case IDENTIFIER -> symbolTable.javaName(node.value);
+            case BINOP -> {
+                String left = generateExpression(node.left);
+                String right = generateExpression(node.right);
+                String temp = newTemp();
+                instructions.add(TACInstruction.binop(temp, left, node.value, right));
+                yield temp;
+            }
+            case CONDITION -> generateCondition(node);
             default -> "0";
         };
     }
 
-    // =========================================
-    // Binary Operation TAC Generation
-    // =========================================
-
-    private String generateBinaryOperation(
-            ASTNode node
-    ) {
-
-        String leftOperand =
-                generateExpression(node.left);
-
-        String rightOperand =
-                generateExpression(node.right);
-
-        String temporaryVariable =
-                createTemporaryVariable();
-
-        instructions.add(
-                TACInstruction.binop(
-                        temporaryVariable,
-                        leftOperand,
-                        node.value,
-                        rightOperand
-                )
-        );
-
-        return temporaryVariable;
-    }
-
-    // =========================================
-    // Temporary Variable Management
-    // =========================================
-
-    private void resetTemporaryCounter() {
-        tempCounter = 0;
-    }
-
-    private String createTemporaryVariable() {
+    private String newTemp() {
         return "t" + tempCounter++;
     }
 
-    // =========================================
-    // String Formatting Helpers
-    // =========================================
+    private String newLabel(String prefix) {
+        return prefix + "_" + labelCounter++;
+    }
 
     private String quoteString(String value) {
-
         if (value == null) {
             return "\"\"";
         }
-
-        String escapedValue = value
-                .replace("\\", "\\\\")
-                .replace("\"", "\\\"");
-
-        return "\"" + escapedValue + "\"";
+        return "\"" + value.replace("\\", "\\\\").replace("\"", "\\\"") + "\"";
     }
 }
