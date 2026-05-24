@@ -2,207 +2,124 @@ import java.util.*;
 
 public class PythonCodeGenerator {
 
-    // =========================================
-    // Generator State
-    // =========================================
-
     private final SymbolTable symbolTable;
+    private final List<String> lines = new ArrayList<>();
+    private int indentLevel = 0;
 
-    private final List<String> lines =
-            new ArrayList<>();
-
-    // =========================================
-    // Constructor
-    // =========================================
-
-    public PythonCodeGenerator(
-            SymbolTable symbolTable
-    ) {
-
+    public PythonCodeGenerator(SymbolTable symbolTable) {
         this.symbolTable = symbolTable;
     }
 
-    // =========================================
-    // Main Python Code Generation
-    // =========================================
-
     public String generate(ASTNode program) {
-
         lines.clear();
-
-        generateHeader();
-
-        for (ASTNode statementNode
-                : program.statements) {
-
-            generateStatement(statementNode);
-        }
-
-        return String.join(
-                System.lineSeparator(),
-                lines
-        ) + System.lineSeparator();
-    }
-
-    // =========================================
-    // Header Generation
-    // =========================================
-
-    private void generateHeader() {
+        indentLevel = 0;
 
         emit("# ============================================================");
         emit("# Generated Python target code");
-        emit("# Produced by Bhasha Compiler Review 2");
+        emit("# Produced by Bhasha Compiler Review 3");
         emit("# Compiler implementation language: Java");
         emit("# Target language: Python");
+        emit("# Executable file: output.py");
         emit("# ============================================================");
-
         emit("");
+
+        for (ASTNode statement : program.statements) {
+            generateStatement(statement);
+        }
+
+        return String.join(System.lineSeparator(), lines) + System.lineSeparator();
     }
 
-    // =========================================
-    // Statement Generation
-    // =========================================
-
     private void generateStatement(ASTNode node) {
-
         if (node == null) {
             return;
         }
 
         switch (node.nodeType) {
-
-            case DECL -> generateDeclaration(node);
-
-            case ASSIGN -> generateAssignment(node);
-
-            case PRINT -> generatePrint(node);
-
-            default -> emit(
-                    "# Unsupported statement in Review 2: "
-                            + node.nodeType
-            );
+            case DECL -> {
+                String targetName = symbolTable.javaName(node.value);
+                emit(targetName + " = " + generateExpression(node.right));
+            }
+            case ASSIGN -> {
+                String targetName = symbolTable.javaName(node.value);
+                emit(targetName + " = " + generateExpression(node.right));
+            }
+            case PRINT -> emit("print(" + generateExpression(node.right) + ")");
+            case IF -> generateIf(node);
+            default -> emit("# Unsupported statement in Review 3: " + node.nodeType);
         }
     }
 
-    // =========================================
-    // Declaration Generation
-    // =========================================
+    private void generateIf(ASTNode node) {
+        emit("if " + generateCondition(node.condition) + ":");
+        indentLevel++;
 
-    private void generateDeclaration(ASTNode node) {
+        if (node.thenBody.isEmpty()) {
+            emit("pass");
+        } else {
+            for (ASTNode statement : node.thenBody) {
+                generateStatement(statement);
+            }
+        }
 
-        String targetName =
-                symbolTable.javaName(node.value);
+        indentLevel--;
+        emit("else:");
+        indentLevel++;
 
-        String expression =
-                generateExpression(node.right);
+        if (node.elseBody.isEmpty()) {
+            emit("pass");
+        } else {
+            for (ASTNode statement : node.elseBody) {
+                generateStatement(statement);
+            }
+        }
 
-        emit(targetName + " = " + expression);
+        indentLevel--;
     }
 
-    // =========================================
-    // Assignment Generation
-    // =========================================
+    private String generateCondition(ASTNode node) {
+        if (node == null) {
+            return "False";
+        }
 
-    private void generateAssignment(ASTNode node) {
+        if (node.nodeType == ASTNode.NodeType.CONDITION) {
+            return generateExpression(node.left) + " " + node.value + " " + generateExpression(node.right);
+        }
 
-        String targetName =
-                symbolTable.javaName(node.value);
-
-        String expression =
-                generateExpression(node.right);
-
-        emit(targetName + " = " + expression);
+        return generateExpression(node) + " != 0";
     }
-
-    // =========================================
-    // Print Statement Generation
-    // =========================================
-
-    private void generatePrint(ASTNode node) {
-
-        String expression =
-                generateExpression(node.right);
-
-        emit("print(" + expression + ")");
-    }
-
-    // =========================================
-    // Expression Generation
-    // =========================================
 
     private String generateExpression(ASTNode node) {
-
         if (node == null) {
             return "None";
         }
 
         return switch (node.nodeType) {
-
             case NUMBER -> node.value;
-
-            case STRING ->
-                    pythonStringLiteral(node.value);
-
-            case IDENTIFIER ->
-                    symbolTable.javaName(node.value);
-
-            case BINOP -> generateBinaryExpression(node);
-
+            case STRING -> pythonStringLiteral(node.value);
+            case IDENTIFIER -> symbolTable.javaName(node.value);
+            case BINOP -> "(" + generateExpression(node.left) + " " + node.value + " " + generateExpression(node.right) + ")";
+            case CONDITION -> generateCondition(node);
             default -> "None";
         };
     }
 
-    // =========================================
-    // Binary Expression Generation
-    // =========================================
-
-    private String generateBinaryExpression(
-            ASTNode node
-    ) {
-
-        String leftExpression =
-                generateExpression(node.left);
-
-        String rightExpression =
-                generateExpression(node.right);
-
-        return "("
-                + leftExpression
-                + " "
-                + node.value
-                + " "
-                + rightExpression
-                + ")";
-    }
-
-    // =========================================
-    // Python String Handling
-    // =========================================
-
-    private String pythonStringLiteral(
-            String value
-    ) {
-
+    private String pythonStringLiteral(String value) {
         if (value == null) {
             return "\"\"";
         }
 
-        String escapedValue = value
+        String escaped = value
                 .replace("\\", "\\\\")
                 .replace("\"", "\\\"")
                 .replace("\n", "\\n")
                 .replace("\r", "\\r")
                 .replace("\t", "\\t");
 
-        return "\"" + escapedValue + "\"";
+        return "\"" + escaped + "\"";
     }
 
-    // =========================================
-    // Output Helpers
-    // =========================================
-
     private void emit(String line) {
-        lines.add(line);
+        lines.add("    ".repeat(Math.max(0, indentLevel)) + line);
     }
 }
