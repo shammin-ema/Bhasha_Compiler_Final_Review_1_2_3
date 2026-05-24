@@ -1,36 +1,67 @@
+============================================================
+BHASHA COMPILER - REVIEW 2 DEMO
+Compiler implementation language: Java
+Generated target language: Python
+Source file: error_sample.bhasha
+Compiler log file: error_output.txt
+============================================================
+
 ===== REVIEW 1: TOKENS =====
-Token(SHONKHA      | "সংখ্যা"             | line 1)
-Token(IDENTIFIER   | "x"                  | line 1)
-Token(ASSIGN       | "="                  | line 1)
-Token(STRING       | "ভুল"                | line 1)
 Token(NEWLINE      | "\n"                 | line 1)
-Token(DEKHAO       | "দেখাও"              | line 2)
-Token(IDENTIFIER   | "y"                  | line 2)
+Token(SHONKHA      | "সংখ্যা"             | line 2)
+Token(IDENTIFIER   | "x"                  | line 2)
+Token(ASSIGN       | "="                  | line 2)
+Token(STRING       | "ভুল"                | line 2)
 Token(NEWLINE      | "\n"                 | line 2)
-Token(SHONKHA      | "সংখ্যা"             | line 3)
-Token(IDENTIFIER   | "z"                  | line 3)
-Token(ASSIGN       | "="                  | line 3)
-Token(NUMBER       | "5"                  | line 3)
-Token(PLUS         | "+"                  | line 3)
-Token(STRING       | "abc"                | line 3)
+Token(DEKHAO       | "দেখাও"              | line 3)
+Token(IDENTIFIER   | "y"                  | line 3)
 Token(NEWLINE      | "\n"                 | line 3)
 Token(SHONKHA      | "সংখ্যা"             | line 4)
-Token(IDENTIFIER   | "a"                  | line 4)
+Token(IDENTIFIER   | "z"                  | line 4)
 Token(ASSIGN       | "="                  | line 4)
-Token(EOF          | ""                   | line 4)
-[Semantic Error] line 1: Type mismatch: variable 'x' is সংখ্যা but value is বাক্য
-[Semantic Error] line 2: Undeclared variable: y
-[Semantic Error] line 3: Arithmetic operator '+' requires সংখ্যা operands
-[Syntax Error] line 4: Expected value but found: 
+Token(NUMBER       | "5"                  | line 4)
+Token(PLUS         | "+"                  | line 4)
+Token(STRING       | "abc"                | line 4)
+Token(NEWLINE      | "\n"                 | line 4)
+Token(SHONKHA      | "সংখ্যা"             | line 5)
+Token(IDENTIFIER   | "a"                  | line 5)
+Token(ASSIGN       | "="                  | line 5)
+Token(NEWLINE      | "\n"                 | line 5)
+Token(NEWLINE      | "\n"                 | line 6)
+Token(SHONKHA      | "সংখ্যা"             | line 7)
+Token(IDENTIFIER   | "ঠিক"                | line 7)
+Token(ASSIGN       | "="                  | line 7)
+Token(NUMBER       | "10"                 | line 7)
+Token(NEWLINE      | "\n"                 | line 7)
+Token(DEKHAO       | "দেখাও"              | line 8)
+Token(IDENTIFIER   | "ঠিক"                | line 8)
+Token(NEWLINE      | "\n"                 | line 8)
+Token(EOF          | ""                   | line 9)
+[Semantic Error] line 2: Type mismatch: variable 'x' is সংখ্যা but value is বাক্য
+[Semantic Error] line 3: Undeclared variable: y
+[Semantic Error] line 4: Arithmetic operator '+' requires সংখ্যা operands
+[Syntax Error] line 5: Expected value but found: \n
 
 ===== REVIEW 1: PARSER RESULT =====
-Total statements parsed: 4
+Total statements parsed: 6
 
 ===== SYMBOL TABLE =====
 Bangla Name               | Type       | Java Name  | Line
-x                         | সংখ্যা     | v0         | 1
-z                         | সংখ্যা     | v1         | 3
-a                         | সংখ্যা     | v2         | 4
+x                         | সংখ্যা     | v0         | 2
+z                         | সংখ্যা     | v1         | 4
+a                         | সংখ্যা     | v2         | 5
+ঠিক                       | সংখ্যা     | v3         | 7
 
 ===== REVIEW 1 RESULT =====
 Review 1 has errors.
+
+===== REVIEW 2: CODE GENERATION =====
+Code generation skipped because syntax/semantic errors were found.
+No Python target file was generated from invalid source code.
+Error recovery was demonstrated by reporting errors and continuing safely.
+
+===== OUTPUT FILES =====
+Normal compiler log: output.txt
+Error compiler log: error_output.txt
+Generated Python file: output.py
+Generated Python program output: program_output.txt (created by run.bat)

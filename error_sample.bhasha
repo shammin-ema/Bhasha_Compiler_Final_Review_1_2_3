@@ -1,4 +1,8 @@
+// Review 2 error sample: demonstrates type errors, undeclared variables, arithmetic errors, and syntax recovery
 সংখ্যা x = "ভুল"
 দেখাও y
 সংখ্যা z = 5 + "abc"
 সংখ্যা a =
+
+সংখ্যা ঠিক = ১০
+দেখাও ঠিক
