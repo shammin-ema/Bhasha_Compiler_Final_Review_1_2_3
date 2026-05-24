@@ -1,63 +1,122 @@
+============================================================
+BHASHA COMPILER - REVIEW 2 DEMO
+Compiler implementation language: Java
+Generated target language: Python
+Source file: sample.bhasha
+Compiler log file: output.txt
+============================================================
+
 ===== REVIEW 1: TOKENS =====
-Token(SHONKHA      | "সংখ্যা"             | line 1)
-Token(IDENTIFIER   | "প্রথম"              | line 1)
-Token(ASSIGN       | "="                  | line 1)
-Token(NUMBER       | "10"                 | line 1)
 Token(NEWLINE      | "\n"                 | line 1)
 Token(SHONKHA      | "সংখ্যা"             | line 2)
-Token(IDENTIFIER   | "দ্বিতীয়"            | line 2)
+Token(IDENTIFIER   | "প্রথম"              | line 2)
 Token(ASSIGN       | "="                  | line 2)
-Token(NUMBER       | "5"                  | line 2)
+Token(NUMBER       | "10"                 | line 2)
 Token(NEWLINE      | "\n"                 | line 2)
 Token(SHONKHA      | "সংখ্যা"             | line 3)
-Token(IDENTIFIER   | "যোগফল"              | line 3)
-Token(ASSIGN       | "="                  | line 3)
-Token(IDENTIFIER   | "প্রথম"              | line 3)
-Token(PLUS         | "+"                  | line 3)
 Token(IDENTIFIER   | "দ্বিতীয়"            | line 3)
+Token(ASSIGN       | "="                  | line 3)
+Token(NUMBER       | "5"                  | line 3)
 Token(NEWLINE      | "\n"                 | line 3)
-Token(SHONKHA      | "সংখ্যা"             | line 4)
-Token(IDENTIFIER   | "গুণফল"              | line 4)
-Token(ASSIGN       | "="                  | line 4)
-Token(IDENTIFIER   | "প্রথম"              | line 4)
-Token(MULTIPLY     | "*"                  | line 4)
-Token(IDENTIFIER   | "দ্বিতীয়"            | line 4)
 Token(NEWLINE      | "\n"                 | line 4)
+Token(SHONKHA      | "সংখ্যা"             | line 5)
+Token(IDENTIFIER   | "যোগফল"              | line 5)
+Token(ASSIGN       | "="                  | line 5)
+Token(IDENTIFIER   | "প্রথম"              | line 5)
+Token(PLUS         | "+"                  | line 5)
+Token(IDENTIFIER   | "দ্বিতীয়"            | line 5)
 Token(NEWLINE      | "\n"                 | line 5)
-Token(BAKKHO       | "বাক্য"              | line 6)
-Token(IDENTIFIER   | "বার্তা"             | line 6)
+Token(SHONKHA      | "সংখ্যা"             | line 6)
+Token(IDENTIFIER   | "বিয়োগফল"            | line 6)
 Token(ASSIGN       | "="                  | line 6)
-Token(STRING       | "হিসাব সম্পন্ন"      | line 6)
+Token(IDENTIFIER   | "প্রথম"              | line 6)
+Token(MINUS        | "-"                  | line 6)
+Token(IDENTIFIER   | "দ্বিতীয়"            | line 6)
 Token(NEWLINE      | "\n"                 | line 6)
+Token(SHONKHA      | "সংখ্যা"             | line 7)
+Token(IDENTIFIER   | "গুণফল"              | line 7)
+Token(ASSIGN       | "="                  | line 7)
+Token(IDENTIFIER   | "প্রথম"              | line 7)
+Token(MULTIPLY     | "*"                  | line 7)
+Token(IDENTIFIER   | "দ্বিতীয়"            | line 7)
 Token(NEWLINE      | "\n"                 | line 7)
-Token(DEKHAO       | "দেখাও"              | line 8)
-Token(STRING       | "যোগফল:"             | line 8)
+Token(SHONKHA      | "সংখ্যা"             | line 8)
+Token(IDENTIFIER   | "জটিলফল"             | line 8)
+Token(ASSIGN       | "="                  | line 8)
+Token(LPAREN       | "("                  | line 8)
+Token(IDENTIFIER   | "প্রথম"              | line 8)
+Token(PLUS         | "+"                  | line 8)
+Token(IDENTIFIER   | "দ্বিতীয়"            | line 8)
+Token(RPAREN       | ")"                  | line 8)
+Token(MULTIPLY     | "*"                  | line 8)
+Token(NUMBER       | "2"                  | line 8)
 Token(NEWLINE      | "\n"                 | line 8)
-Token(DEKHAO       | "দেখাও"              | line 9)
-Token(IDENTIFIER   | "যোগফল"              | line 9)
 Token(NEWLINE      | "\n"                 | line 9)
+Token(IDENTIFIER   | "প্রথম"              | line 10)
+Token(ASSIGN       | "="                  | line 10)
+Token(IDENTIFIER   | "প্রথম"              | line 10)
+Token(PLUS         | "+"                  | line 10)
+Token(NUMBER       | "2"                  | line 10)
 Token(NEWLINE      | "\n"                 | line 10)
-Token(DEKHAO       | "দেখাও"              | line 11)
-Token(STRING       | "গুণফল:"             | line 11)
 Token(NEWLINE      | "\n"                 | line 11)
-Token(DEKHAO       | "দেখাও"              | line 12)
-Token(IDENTIFIER   | "গুণফল"              | line 12)
+Token(BAKKHO       | "বাক্য"              | line 12)
+Token(IDENTIFIER   | "বার্তা"             | line 12)
+Token(ASSIGN       | "="                  | line 12)
+Token(STRING       | "হিসাব সম্পন্ন"      | line 12)
 Token(NEWLINE      | "\n"                 | line 12)
 Token(NEWLINE      | "\n"                 | line 13)
 Token(DEKHAO       | "দেখাও"              | line 14)
-Token(IDENTIFIER   | "বার্তা"             | line 14)
-Token(EOF          | ""                   | line 14)
+Token(STRING       | "যোগফল:"             | line 14)
+Token(NEWLINE      | "\n"                 | line 14)
+Token(DEKHAO       | "দেখাও"              | line 15)
+Token(IDENTIFIER   | "যোগফল"              | line 15)
+Token(NEWLINE      | "\n"                 | line 15)
+Token(NEWLINE      | "\n"                 | line 16)
+Token(DEKHAO       | "দেখাও"              | line 17)
+Token(STRING       | "বিয়োগফল:"           | line 17)
+Token(NEWLINE      | "\n"                 | line 17)
+Token(DEKHAO       | "দেখাও"              | line 18)
+Token(IDENTIFIER   | "বিয়োগফল"            | line 18)
+Token(NEWLINE      | "\n"                 | line 18)
+Token(NEWLINE      | "\n"                 | line 19)
+Token(DEKHAO       | "দেখাও"              | line 20)
+Token(STRING       | "গুণফল:"             | line 20)
+Token(NEWLINE      | "\n"                 | line 20)
+Token(DEKHAO       | "দেখাও"              | line 21)
+Token(IDENTIFIER   | "গুণফল"              | line 21)
+Token(NEWLINE      | "\n"                 | line 21)
+Token(NEWLINE      | "\n"                 | line 22)
+Token(DEKHAO       | "দেখাও"              | line 23)
+Token(STRING       | "জটিল ফল:"           | line 23)
+Token(NEWLINE      | "\n"                 | line 23)
+Token(DEKHAO       | "দেখাও"              | line 24)
+Token(IDENTIFIER   | "জটিলফল"             | line 24)
+Token(NEWLINE      | "\n"                 | line 24)
+Token(NEWLINE      | "\n"                 | line 25)
+Token(DEKHAO       | "দেখাও"              | line 26)
+Token(STRING       | "আপডেটেড প্রথম:"     | line 26)
+Token(NEWLINE      | "\n"                 | line 26)
+Token(DEKHAO       | "দেখাও"              | line 27)
+Token(IDENTIFIER   | "প্রথম"              | line 27)
+Token(NEWLINE      | "\n"                 | line 27)
+Token(NEWLINE      | "\n"                 | line 28)
+Token(DEKHAO       | "দেখাও"              | line 29)
+Token(IDENTIFIER   | "বার্তা"             | line 29)
+Token(NEWLINE      | "\n"                 | line 29)
+Token(EOF          | ""                   | line 30)
 
 ===== REVIEW 1: PARSER RESULT =====
-Total statements parsed: 10
+Total statements parsed: 19
 
 ===== SYMBOL TABLE =====
 Bangla Name               | Type       | Java Name  | Line
-প্রথম                     | সংখ্যা     | v0         | 1
-দ্বিতীয়                   | সংখ্যা     | v1         | 2
-যোগফল                     | সংখ্যা     | v2         | 3
-গুণফল                     | সংখ্যা     | v3         | 4
-বার্তা                    | বাক্য      | v4         | 6
+প্রথম                     | সংখ্যা     | v0         | 2
+দ্বিতীয়                   | সংখ্যা     | v1         | 3
+যোগফল                     | সংখ্যা     | v2         | 5
+বিয়োগফল                   | সংখ্যা     | v3         | 6
+গুণফল                     | সংখ্যা     | v4         | 7
+জটিলফল                    | সংখ্যা     | v5         | 8
+বার্তা                    | বাক্য      | v6         | 12
 
 ===== REVIEW 1 RESULT =====
 Lexer tokenizes source code correctly.
@@ -65,5 +124,75 @@ Parser handles valid input.
 Symbol table is working.
 Type checking is working.
 Assignments are working.
-Arithmetic expressions are working.
+Arithmetic expressions are working with operator precedence.
 Review 1 completed successfully.
+
+===== REVIEW 2: CODE GENERATION =====
+
+===== REVIEW 2: THREE ADDRESS CODE (TAC) =====
+#     | Kind     | Instruction
+------+----------+------------------------------
+0     | COPY     | v0 = 10
+1     | COPY     | v1 = 5
+2     | BINOP    | t0 = v0 + v1
+3     | COPY     | v2 = t0
+4     | BINOP    | t1 = v0 - v1
+5     | COPY     | v3 = t1
+6     | BINOP    | t2 = v0 * v1
+7     | COPY     | v4 = t2
+8     | BINOP    | t3 = v0 + v1
+9     | BINOP    | t4 = t3 * 2
+10    | COPY     | v5 = t4
+11    | BINOP    | t5 = v0 + 2
+12    | COPY     | v0 = t5
+13    | COPY     | v6 = "হিসাব সম্পন্ন"
+14    | PRINT    | print "যোগফল:"
+15    | PRINT    | print v2
+16    | PRINT    | print "বিয়োগফল:"
+17    | PRINT    | print v3
+18    | PRINT    | print "গুণফল:"
+19    | PRINT    | print v4
+20    | PRINT    | print "জটিল ফল:"
+21    | PRINT    | print v5
+22    | PRINT    | print "আপডেটেড প্রথম:"
+23    | PRINT    | print v0
+24    | PRINT    | print v6
+
+===== REVIEW 2: GENERATED PYTHON TARGET CODE =====
+# ============================================================
+# Generated Python target code
+# Produced by Bhasha Compiler Review 2
+# Compiler implementation language: Java
+# Target language: Python
+# ============================================================
+
+v0 = 10
+v1 = 5
+v2 = (v0 + v1)
+v3 = (v0 - v1)
+v4 = (v0 * v1)
+v5 = ((v0 + v1) * 2)
+v0 = (v0 + 2)
+v6 = "হিসাব সম্পন্ন"
+print("যোগফল:")
+print(v2)
+print("বিয়োগফল:")
+print(v3)
+print("গুণফল:")
+print(v4)
+print("জটিল ফল:")
+print(v5)
+print("আপডেটেড প্রথম:")
+print(v0)
+print(v6)
+===== REVIEW 2 RESULT =====
+Python target code generated successfully.
+Generated executable file: output.py
+Run it with: py -X utf8 output.py
+If 'py' is not available, use: python output.py
+
+===== OUTPUT FILES =====
+Normal compiler log: output.txt
+Error compiler log: error_output.txt
+Generated Python file: output.py
+Generated Python program output: program_output.txt (created by run.bat)

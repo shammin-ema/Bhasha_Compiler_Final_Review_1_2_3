@@ -1,0 +1,47 @@
+===== REVIEW 2 NORMAL RUN =====
+
+.un.bat
+
+This command compiles the Java compiler, runs sample.bhasha, generates output.py,
+runs output.py, and saves the final Python program output in program_output.txt.
+
+
+===== REVIEW 2 ERROR RUN =====
+
+.un_error.bat
+
+This command compiles the Java compiler, runs error_sample.bhasha, prints errors,
+saves the error log in error_output.txt, and skips output.py generation.
+
+
+===== MANUAL NORMAL COMMANDS =====
+
+chcp 65001
+javac -encoding UTF-8 *.java
+java -Dfile.encoding=UTF-8 Main sample.bhasha
+Get-Content output.txt -Encoding UTF8
+Get-Content output.py -Encoding UTF8
+py -X utf8 output.py
+py -X utf8 output.py > program_output.txt
+Get-Content program_output.txt -Encoding UTF8
+
+
+===== MANUAL ERROR COMMANDS =====
+
+chcp 65001
+javac -encoding UTF-8 *.java
+java -Dfile.encoding=UTF-8 Main error_sample.bhasha
+Get-Content error_output.txt -Encoding UTF8
+
+
+===== OPEN OUTPUT FILES IN VS CODE =====
+
+code output.txt
+code error_output.txt
+code output.py
+code program_output.txt
+
+
+===== IMPORTANT REVIEW 2 LINE =====
+
+Our compiler is implemented in Java, but it generates executable Python target code in output.py.

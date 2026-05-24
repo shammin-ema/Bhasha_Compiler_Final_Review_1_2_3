@@ -1,0 +1,24 @@
+BHASHA COMPILER - REVIEW 2 STATUS
+
+Review 2 requirement: code generation for all features except if-else, generated code execution, and error recovery.
+
+STATUS: READY FOR REVIEW 2 DEMO
+
+Implemented / preserved:
+1. Java compiler implementation is preserved.
+2. Review 1 lexer/parser/symbol table/type checking still works.
+3. Bangla source file sample.bhasha is updated for Review 2.
+4. Java compiler now generates executable Python target code in output.py.
+5. TAC generation is shown in output.txt.
+6. output.py runs and produces the correct result.
+7. program_output.txt stores the generated Python program output.
+8. error_sample.bhasha demonstrates syntax and semantic errors.
+9. error_output.txt stores the error log.
+10. Code generation is skipped when errors are found.
+11. run.bat gives the normal demo using one command.
+12. run_error.bat gives the error demo using one command.
+13. COMMANDS_REVIEW2.txt stores all useful commands.
+14. If-else is intentionally kept for Review 3.
+
+Most important explanation line:
+"Our compiler is implemented in Java, but it generates executable Python target code in output.py."
