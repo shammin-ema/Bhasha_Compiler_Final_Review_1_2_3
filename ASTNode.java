@@ -1,4 +1,5 @@
 import java.util.*;
+
 public class ASTNode {
 
     public enum NodeType {
@@ -13,8 +14,11 @@ public class ASTNode {
         STRING,
         IDENTIFIER,
 
-        // Future Review 3
+        // Review 3
         IF,
+        CONDITION,
+
+        // Optional/future
         WHILE
     }
 
@@ -28,10 +32,12 @@ public class ASTNode {
     public ASTNode left;
     public ASTNode right;
 
-    // Future fields for Review 3
+    // Review 3 if-else support
     public ASTNode condition;
     public List<ASTNode> thenBody = new ArrayList<>();
     public List<ASTNode> elseBody = new ArrayList<>();
+
+    // Optional/future loop support
     public List<ASTNode> loopBody = new ArrayList<>();
 
     public List<ASTNode> statements = new ArrayList<>();
