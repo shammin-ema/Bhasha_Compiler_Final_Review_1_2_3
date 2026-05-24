@@ -1,38 +1,123 @@
 @echo off
-chcp 65001
+setlocal
 
-echo ===== Compiling Java Compiler =====
+:: =========================================
+:: Bhasha Compiler Automation Script
+:: =========================================
+
+chcp 65001 > nul
+
+echo.
+echo =========================================
+echo        Bhasha Compiler Review 2
+echo =========================================
+
+:: =========================================
+:: Step 1 : Compile Java Source Files
+:: =========================================
+
+echo.
+echo [1/5] Compiling Java source files...
+
 javac -encoding UTF-8 *.java
+
 if errorlevel 1 (
-    echo Java compiler build failed.
+    echo.
+    echo [ERROR] Java compilation failed.
+    echo Please fix compilation errors and try again.
     pause
     exit /b 1
 )
 
+echo [SUCCESS] Java compilation completed.
+
+:: =========================================
+:: Step 2 : Run Compiler
+:: =========================================
+
 echo.
-echo ===== Running Bhasha Compiler with sample.bhasha =====
+echo [2/5] Running compiler with sample.bhasha...
+
 java -Dfile.encoding=UTF-8 Main sample.bhasha
 
-echo.
-echo ===== Running Generated Python Program =====
-py -X utf8 output.py
 if errorlevel 1 (
-    echo py command failed. Trying python command...
-    python output.py
+    echo.
+    echo [ERROR] Compiler execution failed.
+    pause
+    exit /b 1
 )
 
+echo [SUCCESS] Compiler execution completed.
+
+:: =========================================
+:: Step 3 : Execute Generated Python Program
+:: =========================================
+
 echo.
-echo ===== Saving Python Program Output to program_output.txt =====
+echo [3/5] Running generated Python program...
+
+py -X utf8 output.py
+
+if errorlevel 1 (
+    echo.
+    echo [INFO] 'py' command unavailable.
+    echo Trying fallback python command...
+
+    python output.py
+
+    if errorlevel 1 (
+        echo.
+        echo [ERROR] Python execution failed.
+        pause
+        exit /b 1
+    )
+)
+
+echo [SUCCESS] Python execution completed.
+
+:: =========================================
+:: Step 4 : Save Program Output
+:: =========================================
+
+echo.
+echo [4/5] Saving output to program_output.txt...
+
 py -X utf8 output.py > program_output.txt
+
 if errorlevel 1 (
     python output.py > program_output.txt
 )
 
-echo.
-echo ===== Showing program_output.txt =====
-type program_output.txt
+echo [SUCCESS] Output saved successfully.
+
+:: =========================================
+:: Step 5 : Display Program Output
+:: =========================================
 
 echo.
-echo ===== Review 2 normal demo complete =====
-echo Files created/updated: output.txt, output.py, program_output.txt
+echo [5/5] Displaying generated output...
+
+echo -----------------------------------------
+type program_output.txt
+echo -----------------------------------------
+
+:: =========================================
+:: Final Status
+:: =========================================
+
+echo.
+echo =========================================
+echo      Review 2 Demo Completed
+echo =========================================
+
+echo.
+echo Generated Files:
+echo - output.txt
+echo - output.py
+echo - program_output.txt
+
+echo.
+echo Compiler pipeline executed successfully.
+
 pause
+endlocal
