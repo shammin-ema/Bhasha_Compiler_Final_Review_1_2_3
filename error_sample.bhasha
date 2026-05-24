@@ -1,8 +1,28 @@
-// Review 2 error sample: demonstrates type errors, undeclared variables, arithmetic errors, and syntax recovery
+// Review 3 error sample: old errors + if-else syntax/semantic error recovery
 সংখ্যা x = "ভুল"
 দেখাও y
 সংখ্যা z = 5 + "abc"
 সংখ্যা a =
 
 সংখ্যা ঠিক = ১০
+বাক্য বার্তা = "hello"
+
+যদি ঠিক > বার্তা তাহলে
+    দেখাও "এই condition type mismatch"
+নাহলে
+    দেখাও "else block"
+শেষ
+
+যদি অজানা > ৫ তাহলে
+    দেখাও "undeclared variable in condition"
+নাহলে
+    দেখাও "else block"
+শেষ
+
+যদি ঠিক > ৫
+    দেখাও "তাহলে keyword missing"
+নাহলে
+    দেখাও "else block"
+শেষ
+
 দেখাও ঠিক

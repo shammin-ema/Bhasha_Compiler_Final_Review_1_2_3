@@ -1,7 +1,8 @@
 ============================================================
-BHASHA COMPILER - REVIEW 2 DEMO
+BHASHA COMPILER - REVIEW 3 DEMO
 Compiler implementation language: Java
 Generated target language: Python
+Generated executable target file: output.py
 Source file: error_sample.bhasha
 Compiler log file: error_output.txt
 ============================================================
@@ -33,17 +34,78 @@ Token(IDENTIFIER   | "ঠিক"                | line 7)
 Token(ASSIGN       | "="                  | line 7)
 Token(NUMBER       | "10"                 | line 7)
 Token(NEWLINE      | "\n"                 | line 7)
-Token(DEKHAO       | "দেখাও"              | line 8)
-Token(IDENTIFIER   | "ঠিক"                | line 8)
+Token(BAKKHO       | "বাক্য"              | line 8)
+Token(IDENTIFIER   | "বার্তা"             | line 8)
+Token(ASSIGN       | "="                  | line 8)
+Token(STRING       | "hello"              | line 8)
 Token(NEWLINE      | "\n"                 | line 8)
-Token(EOF          | ""                   | line 9)
+Token(NEWLINE      | "\n"                 | line 9)
+Token(JODI         | "যদি"                | line 10)
+Token(IDENTIFIER   | "ঠিক"                | line 10)
+Token(GREATER      | ">"                  | line 10)
+Token(IDENTIFIER   | "বার্তা"             | line 10)
+Token(TAHOLE       | "তাহলে"              | line 10)
+Token(NEWLINE      | "\n"                 | line 10)
+Token(DEKHAO       | "দেখাও"              | line 11)
+Token(STRING       | "এই condition type mismatch" | line 11)
+Token(NEWLINE      | "\n"                 | line 11)
+Token(NAHLE        | "নাহলে"              | line 12)
+Token(NEWLINE      | "\n"                 | line 12)
+Token(DEKHAO       | "দেখাও"              | line 13)
+Token(STRING       | "else block"         | line 13)
+Token(NEWLINE      | "\n"                 | line 13)
+Token(SESH         | "শেষ"                | line 14)
+Token(NEWLINE      | "\n"                 | line 14)
+Token(NEWLINE      | "\n"                 | line 15)
+Token(JODI         | "যদি"                | line 16)
+Token(IDENTIFIER   | "অজানা"              | line 16)
+Token(GREATER      | ">"                  | line 16)
+Token(NUMBER       | "5"                  | line 16)
+Token(TAHOLE       | "তাহলে"              | line 16)
+Token(NEWLINE      | "\n"                 | line 16)
+Token(DEKHAO       | "দেখাও"              | line 17)
+Token(STRING       | "undeclared variable in condition" | line 17)
+Token(NEWLINE      | "\n"                 | line 17)
+Token(NAHLE        | "নাহলে"              | line 18)
+Token(NEWLINE      | "\n"                 | line 18)
+Token(DEKHAO       | "দেখাও"              | line 19)
+Token(STRING       | "else block"         | line 19)
+Token(NEWLINE      | "\n"                 | line 19)
+Token(SESH         | "শেষ"                | line 20)
+Token(NEWLINE      | "\n"                 | line 20)
+Token(NEWLINE      | "\n"                 | line 21)
+Token(JODI         | "যদি"                | line 22)
+Token(IDENTIFIER   | "ঠিক"                | line 22)
+Token(GREATER      | ">"                  | line 22)
+Token(NUMBER       | "5"                  | line 22)
+Token(NEWLINE      | "\n"                 | line 22)
+Token(DEKHAO       | "দেখাও"              | line 23)
+Token(STRING       | "তাহলে keyword missing" | line 23)
+Token(NEWLINE      | "\n"                 | line 23)
+Token(NAHLE        | "নাহলে"              | line 24)
+Token(NEWLINE      | "\n"                 | line 24)
+Token(DEKHAO       | "দেখাও"              | line 25)
+Token(STRING       | "else block"         | line 25)
+Token(NEWLINE      | "\n"                 | line 25)
+Token(SESH         | "শেষ"                | line 26)
+Token(NEWLINE      | "\n"                 | line 26)
+Token(NEWLINE      | "\n"                 | line 27)
+Token(DEKHAO       | "দেখাও"              | line 28)
+Token(IDENTIFIER   | "ঠিক"                | line 28)
+Token(NEWLINE      | "\n"                 | line 28)
+Token(EOF          | ""                   | line 29)
 [Semantic Error] line 2: Type mismatch: variable 'x' is সংখ্যা but value is বাক্য
 [Semantic Error] line 3: Undeclared variable: y
 [Semantic Error] line 4: Arithmetic operator '+' requires সংখ্যা operands
 [Syntax Error] line 5: Expected value but found: \n
+[Semantic Error] line 10: Condition operator '>' requires সংখ্যা operands
+[Semantic Error] line 16: Undeclared variable: অজানা
+[Semantic Error] line 16: Condition operator '>' requires declared operands
+[Syntax Error] line 22: Expected TAHOLE but found NEWLINE
 
 ===== REVIEW 1: PARSER RESULT =====
-Total statements parsed: 6
+Total top-level statements parsed: 10
+Total if-else statements parsed: 3
 
 ===== SYMBOL TABLE =====
 Bangla Name               | Type       | Java Name  | Line
@@ -51,11 +113,12 @@ x                         | সংখ্যা     | v0         | 2
 z                         | সংখ্যা     | v1         | 4
 a                         | সংখ্যা     | v2         | 5
 ঠিক                       | সংখ্যা     | v3         | 7
+বার্তা                    | বাক্য      | v4         | 8
 
 ===== REVIEW 1 RESULT =====
-Review 1 has errors.
+Review 1/semantic phase has errors.
 
-===== REVIEW 2: CODE GENERATION =====
+===== REVIEW 2: CODE GENERATION BASE =====
 Code generation skipped because syntax/semantic errors were found.
 No Python target file was generated from invalid source code.
 Error recovery was demonstrated by reporting errors and continuing safely.
@@ -63,5 +126,5 @@ Error recovery was demonstrated by reporting errors and continuing safely.
 ===== OUTPUT FILES =====
 Normal compiler log: output.txt
 Error compiler log: error_output.txt
-Generated Python file: output.py
+Generated Python executable file: output.py
 Generated Python program output: program_output.txt (created by run.bat)
