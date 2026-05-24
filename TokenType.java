@@ -33,6 +33,10 @@ public enum TokenType {
     EQUALS,
     NOT_EQUALS,
 
+    // Parentheses for arithmetic grouping
+    LPAREN,
+    RPAREN,
+
     // Misc
     SEMICOLON,
     NEWLINE,

@@ -70,6 +70,18 @@ public class Lexer {
                 continue;
             }
 
+            if (c == '(') {
+                tokens.add(new Token(TokenType.LPAREN, "(", line));
+                pos++;
+                continue;
+            }
+
+            if (c == ')') {
+                tokens.add(new Token(TokenType.RPAREN, ")", line));
+                pos++;
+                continue;
+            }
+
             if (c == '+') {
                 tokens.add(new Token(TokenType.PLUS, "+", line));
                 pos++;
@@ -189,6 +201,7 @@ public class Lexer {
         return c == ' ' || c == '\t' || c == '\r' || c == '\n'
                 || c == '+' || c == '-' || c == '*' || c == '/'
                 || c == '=' || c == '>' || c == '<' || c == '!'
+                || c == '(' || c == ')'
                 || c == '"' || c == ';';
     }
 
