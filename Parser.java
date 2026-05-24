@@ -7,7 +7,7 @@ public class Parser {
     public boolean hasError = false;
 
     public Parser(List<Token> tokens) {
-        this.tokens = tokens;    
+        this.tokens = tokens;
     }
 
     public SymbolTable getSymbolTable() {
@@ -219,6 +219,13 @@ public class Parser {
             return node;
         }
 
+        if (check(TokenType.LPAREN)) {
+            consume();
+            ASTNode expression = parseExpression();
+            expect(TokenType.RPAREN);
+            return expression;
+        }
+
         syntaxError("Expected value but found: " + token.value);
         recoverToNewlineOrSemicolon();
 
@@ -246,6 +253,14 @@ public class Parser {
                 if (!"সংখ্যা".equals(leftType) || !"সংখ্যা".equals(rightType)) {
                     semanticError("Arithmetic operator '" + node.value
                             + "' requires সংখ্যা operands", node.line);
+                    yield null;
+                }
+
+                if ("/".equals(node.value)
+                        && node.right != null
+                        && node.right.nodeType == ASTNode.NodeType.NUMBER
+                        && "0".equals(node.right.value)) {
+                    semanticError("Division by zero", node.line);
                     yield null;
                 }
 
