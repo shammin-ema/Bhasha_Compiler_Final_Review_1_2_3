@@ -27,9 +27,10 @@ public class Main {
             System.setErr(fileAndConsole);
 
             System.out.println("============================================================");
-            System.out.println("BHASHA COMPILER - REVIEW 2 DEMO");
+            System.out.println("BHASHA COMPILER - REVIEW 3 DEMO");
             System.out.println("Compiler implementation language: Java");
             System.out.println("Generated target language: Python");
+            System.out.println("Generated executable target file: " + GENERATED_PYTHON_FILE);
             System.out.println("Source file: " + fileName);
             System.out.println("Compiler log file: " + outputFile);
             System.out.println("============================================================");
@@ -48,7 +49,8 @@ public class Main {
             ASTNode program = parser.parseProgram();
 
             System.out.println("\n===== REVIEW 1: PARSER RESULT =====");
-            System.out.println("Total statements parsed: " + program.statements.size());
+            System.out.println("Total top-level statements parsed: " + program.statements.size());
+            System.out.println("Total if-else statements parsed: " + countIfStatements(program));
 
             SymbolTable symbolTable = parser.getSymbolTable();
             symbolTable.printTable();
@@ -57,7 +59,7 @@ public class Main {
 
             System.out.println("\n===== REVIEW 1 RESULT =====");
             if (hasAnyError) {
-                System.out.println("Review 1 has errors.");
+                System.out.println("Review 1/semantic phase has errors.");
             } else {
                 System.out.println("Lexer tokenizes source code correctly.");
                 System.out.println("Parser handles valid input.");
@@ -65,10 +67,10 @@ public class Main {
                 System.out.println("Type checking is working.");
                 System.out.println("Assignments are working.");
                 System.out.println("Arithmetic expressions are working with operator precedence.");
-                System.out.println("Review 1 completed successfully.");
+                System.out.println("Review 1 features are still working.");
             }
 
-            System.out.println("\n===== REVIEW 2: CODE GENERATION =====");
+            System.out.println("\n===== REVIEW 2: CODE GENERATION BASE =====");
             if (hasAnyError) {
                 Files.deleteIfExists(Path.of(GENERATED_PYTHON_FILE));
                 Files.deleteIfExists(Path.of(PROGRAM_OUTPUT_FILE));
@@ -79,17 +81,20 @@ public class Main {
                 TACGenerator tacGenerator = new TACGenerator(symbolTable);
                 List<TACInstruction> instructions = tacGenerator.generate(program);
 
-                System.out.println("\n===== REVIEW 2: THREE ADDRESS CODE (TAC) =====");
+                System.out.println("\n===== REVIEW 2/3: THREE ADDRESS CODE (TAC) =====");
                 printTAC(instructions);
 
                 PythonCodeGenerator pythonGenerator = new PythonCodeGenerator(symbolTable);
                 String pythonCode = pythonGenerator.generate(program);
                 Files.writeString(Path.of(GENERATED_PYTHON_FILE), pythonCode, StandardCharsets.UTF_8);
 
-                System.out.println("\n===== REVIEW 2: GENERATED PYTHON TARGET CODE =====");
+                System.out.println("\n===== REVIEW 3: GENERATED PYTHON TARGET CODE =====");
                 System.out.print(pythonCode);
 
-                System.out.println("===== REVIEW 2 RESULT =====");
+                System.out.println("===== REVIEW 3 RESULT =====");
+                System.out.println("Review 1 features kept working.");
+                System.out.println("Review 2 Python code generation kept working.");
+                System.out.println("Review 3 if-else parsing and code generation completed successfully.");
                 System.out.println("Python target code generated successfully.");
                 System.out.println("Generated executable file: " + GENERATED_PYTHON_FILE);
                 System.out.println("Run it with: py -X utf8 " + GENERATED_PYTHON_FILE);
@@ -99,7 +104,7 @@ public class Main {
             System.out.println("\n===== OUTPUT FILES =====");
             System.out.println("Normal compiler log: output.txt");
             System.out.println("Error compiler log: error_output.txt");
-            System.out.println("Generated Python file: output.py");
+            System.out.println("Generated Python executable file: output.py");
             System.out.println("Generated Python program output: program_output.txt (created by run.bat)");
 
         } catch (Exception e) {
@@ -109,9 +114,31 @@ public class Main {
         }
     }
 
+    private static int countIfStatements(ASTNode node) {
+        if (node == null) {
+            return 0;
+        }
+
+        int count = node.nodeType == ASTNode.NodeType.IF ? 1 : 0;
+
+        for (ASTNode statement : node.statements) {
+            count += countIfStatements(statement);
+        }
+
+        for (ASTNode statement : node.thenBody) {
+            count += countIfStatements(statement);
+        }
+
+        for (ASTNode statement : node.elseBody) {
+            count += countIfStatements(statement);
+        }
+
+        return count;
+    }
+
     private static void printTAC(List<TACInstruction> instructions) {
-        System.out.printf("%-5s | %-8s | %s%n", "#", "Kind", "Instruction");
-        System.out.println("------+----------+------------------------------");
+        System.out.printf("%-5s | %-14s | %s%n", "#", "Kind", "Instruction");
+        System.out.println("------+----------------+------------------------------");
 
         if (instructions.isEmpty()) {
             System.out.println("(No TAC instructions generated)");
@@ -120,7 +147,7 @@ public class Main {
 
         for (int i = 0; i < instructions.size(); i++) {
             TACInstruction instruction = instructions.get(i);
-            System.out.printf("%-5d | %-8s | %s%n", i, instruction.kind, instruction);
+            System.out.printf("%-5d | %-14s | %s%n", i, instruction.kind, instruction);
         }
     }
 }
