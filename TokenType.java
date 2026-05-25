@@ -6,26 +6,28 @@ public enum TokenType {
     // Output
     DEKHAO,         // দেখাও
 
-    // Future keywords for Review 3
+    // Review 3 conditional keywords
     JODI,           // যদি
     TAHOLE,         // তাহলে
     NAHLE,          // নাহলে
-    JOTOKKHON,      // যতক্ষণ
     SESH,           // শেষ
+
+    // Optional/future loop keyword
+    JOTOKKHON,      // যতক্ষণ
 
     // Literals and identifier
     NUMBER,
     STRING,
     IDENTIFIER,
 
-    // Operators
+    // Arithmetic / assignment operators
     PLUS,
     MINUS,
     MULTIPLY,
     DIVIDE,
     ASSIGN,
 
-    // Future comparison operators for Review 3
+    // Review 3 comparison operators
     GREATER,
     LESS,
     GREATER_EQ,
