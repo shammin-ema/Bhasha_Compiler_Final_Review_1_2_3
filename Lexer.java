@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Lexer {
+public class Lexer {  
 
     private final String source;
     private int pos = 0;
@@ -16,7 +16,7 @@ public class Lexer {
         KEYWORDS.put("বাক্য", TokenType.BAKKHO);
         KEYWORDS.put("দেখাও", TokenType.DEKHAO);
 
-        // Future Review 3 keywords
+        // Review 3 conditional keywords
         KEYWORDS.put("যদি", TokenType.JODI);
         KEYWORDS.put("তাহলে", TokenType.TAHOLE);
         KEYWORDS.put("নাহলে", TokenType.NAHLE);
